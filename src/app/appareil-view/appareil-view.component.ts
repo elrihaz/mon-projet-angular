@@ -14,10 +14,7 @@ export class AppareilViewComponent implements OnInit {
 
   authStatus: boolean;
 
-  lastUpdate = new Promise( (resolve, reject) => {
-    const date = new Date();
-    setTimeout( () => { resolve(date);}, 2000 );
-  } );
+  lastUpdate = new Date();
 
   constructor(private appareilService:AppareilService, private authService: AuthService) { }
 

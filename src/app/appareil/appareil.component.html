@@ -1,10 +1,12 @@
 <li [ngClass]="{  'list-group-item': true,
                   'list-group-item-success': appareilStatus === 'allumé',
-                  'list-group-item-danger': appareilStatus === 'éteint'}">
+                  'list-group-item-danger': appareilStatus === 'éteint'}"
+        style="margin-bottom:10px;">
 
   <h4 [ngStyle]="{color: getColor()}">
     Appareil: {{ appareilName }} -- Status: {{ getStatus() }}
   </h4>
+  <p><a [routerLink]="[appareilId]">Détail</a></p>
 
   <button class="btn btn-sm btn-success"
           *ngIf="appareilStatus==='éteint'"
