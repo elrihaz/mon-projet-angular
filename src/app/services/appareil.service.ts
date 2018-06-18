@@ -59,4 +59,17 @@ export class AppareilService {
         return appareil;
     }
 
+    addAppareil(name:string, status:string) {
+        const nvAppareil = {
+            id: 0,
+            name: '',
+            status: ''
+        };
+        nvAppareil.name = name;
+        nvAppareil.status = status;
+        nvAppareil.id = this.appareils[this.appareils.length - 1].id + 1;
+        this.appareils.push(nvAppareil);
+        this.emitAppareilsSubject();
+    }
+
 }
