@@ -1,12 +1,19 @@
 <!-- barre de navigation -->
 <ul class="nav">
-        <li routerLinkActive="active">
-          <a routerLink="auth">Authentification</a>
-        </li>
-        <li routerLinkActive="active">
-          <a routerLink="appareils">Appareils</a>
-        </li>
-      </ul>
+  <li routerLinkActive="active">
+    <a routerLink="auth">Authentification</a>
+  </li>
+  <li routerLinkActive="active">
+    <a routerLink="appareils">Appareils</a>
+  </li>
+</ul>
+
+<!-- Timer -->
+<div class="timer">
+  <p>Vous êtes connecté depuis {{ secondes }} secondes !</p>
+</div>
+
+
 
 <!-- contenu -->
 <div class="container" style="margin-top:50px;">
