@@ -1,26 +1,42 @@
 import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
+@Injectable()
 export class AppareilService {
 
     appareilsSubject = new Subject<any[]>();
     
-    private appareils = [
-        {
-            id: 1,
-            name: 'Machine à laver',
-            status: 'éteint'
-        },
-        {
-            id: 2,
-            name: 'Frigo',
-            status: 'allumé'
-        },
-        {
-            id: 3,
-            name: 'Ordinateur',
-            status: 'éteint'
-        }
-    ];
+    private appareils = [];
+
+    constructor( private httpClient:HttpClient ) {}
+
+    saveAppareilsToServer() {
+        this.httpClient
+        .put('https://appareils-a1ee2.firebaseio.com/appareils.json', this.appareils)
+        .subscribe(
+            () => {
+                console.log('Enregistrement terminé !');
+            },
+            (error) => {
+                console.log('Erreur ! : ' + error);
+            }
+        );
+    }
+    
+    getAppareilsFromServer() {
+        this.httpClient
+        .get<any[]>('https://appareils-a1ee2.firebaseio.com//appareils.json')
+        .subscribe(
+            (response) => {
+                this.appareils = response;
+                this.emitAppareilsSubject();
+            },
+            (error) => {
+              console.log('Erreur ! : ' + error);
+            }
+        );
+    }
 
     emitAppareilsSubject() {
         this.appareilsSubject.next(this.appareils.slice());
@@ -67,7 +83,11 @@ export class AppareilService {
         };
         nvAppareil.name = name;
         nvAppareil.status = status;
-        nvAppareil.id = this.appareils[this.appareils.length - 1].id + 1;
+        if(this.appareils.length > 0) {
+            nvAppareil.id = this.appareils[this.appareils.length - 1].id + 1;
+        } else {
+            nvAppareil.id = 0;
+        }
         this.appareils.push(nvAppareil);
         this.emitAppareilsSubject();
     }
