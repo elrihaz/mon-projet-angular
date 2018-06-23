@@ -12,8 +12,8 @@ export class EditAppareilComponent {
 
   defaultOnOff = 'éteint';
 
-  constructor(  private appareilService:AppareilService,
-                private router:Router ) { }
+  constructor(  private appareilService: AppareilService,
+                private router: Router ) { }
 
   onSubmit(form: NgForm) {
     const name = form.value['name'];
